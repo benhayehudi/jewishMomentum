@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, AppState } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -14,6 +14,21 @@ const styles = StyleSheet.create({
     margin: 10,
   },
 });
+
+componentDidMount() {
+  AppState.addEventListener('change', this.handleAppStateChange);
+}
+
+componentWillUnmount() {
+  AppState.removeEventListener('change', this.handleAppStateChange);
+}
+
+handleAppStateChange(appState) {
+  if (appState === 'background') {
+    // TODO: Schedule background notifications
+    console.log('jewishMomentum is running in the background.');
+  }
+}
 
 export default class App extends Component {
   render() {
