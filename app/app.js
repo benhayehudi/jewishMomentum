@@ -9,13 +9,27 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#000000',
   },
   welcome: {
-    fontSize: 20,
+    fontSize: 35,
+    color: '#FFFFFF',
     textAlign: 'center',
     margin: 10,
+    paddingBottom: 40,
   },
+  intro: {
+    fontSize: 20,
+    margin: 20,
+    padding: 20,
+    color: "#FFFFFF",
+  },
+  contact: {
+    fontSize: 14,
+    margin: 10,
+    color: '#FFFFFF',
+    paddingTop: 30
+  }
 });
 
 export default class App extends Component {
@@ -35,13 +49,12 @@ export default class App extends Component {
 
   handleAppStateChange(appState) {
     if (appState === 'background') {
-      let quote = quotes[Math.floor(Math.random()*quotes.length)];
       PushNotification.localNotificationSchedule({
-        message: quote,
-        // date: new Date(Date.now()),
-        // repeatType: 'time',
-        // repeatTime: 28800000, // every 8 hours
-        date: new Date(Date.now() + (5 * 1000))
+        message: quotes[Math.floor(Math.random()*quotes.length)],
+        date: new Date(Date.now()),
+        repeatType: 'time',
+        repeatTime: 57600000, // every 16 hours
+        //date: new Date(Date.now() + (5 * 1000))
       });
     }
   }
@@ -49,9 +62,10 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to Jewish Momentum</Text>
-        <Text style={styles.welcome}>Daily inspiration delivered straight to your phone.</Text>
-        <Text style={styles.welcome}>Created by Rabbi Ben Greenberg</Text>
+        <Text style={styles.welcome}>Jewish Momentum</Text>
+        <Text style={styles.intro}>Daily inspiration delivered straight to your phone. Receive a notification twice a day containing a pearl of Jewish wisdom to inspire you and motivate you.</Text>
+        <Text style={styles.contact}>Made with &hearts;</Text>
+        <Text style={styles.contact}>Rabbi Ben Greenberg (http://reactiverabbi.io)</Text>
         <PushController />
       </View>
     )
